@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-from secrets import .
+from mysite import secrets
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'heritagesites.apps.HeritagesitesConfig',
     'social_django',
+    'crispy_forms',
     'test_without_migrations'
 ]
 
@@ -154,3 +155,6 @@ LOGIN_URL = '/auth/login/google-oauth2/'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# Django Crispy-forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
