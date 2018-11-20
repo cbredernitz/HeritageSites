@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'heritagesites.apps.HeritagesitesConfig',
     'social_django',
+    'django_filters',
     'crispy_forms',
     'test_without_migrations'
 ]
