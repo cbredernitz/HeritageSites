@@ -38,14 +38,29 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    # Local
+    'api.apps.ApiConfig',
     'heritagesites.apps.HeritagesitesConfig',
+    # Third-Party
     'social_django',
     'django_filters',
     'crispy_forms',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'rest_auth',
+    'rest_auth.registration',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_framework_swagger',
+    'corsheaders',
     'test_without_migrations'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -159,3 +174,38 @@ LOGOUT_REDIRECT_URL = '/'
 
 # Django Crispy-forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# REST Framework
+
+# Use Django's standard `django.contrib.auth` permissions, or allow read-only access for
+# unauthenticated users.
+# Default Auth: Basic (retired in favor of TokenAuth)
+# Default Auth: SessionAuth (required by browsable API)
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+	    'rest_framework.permissions.IsAuthenticatedOrReadOnly'
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        # 'rest_framework.permissions.AllowAny'
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
+
+# CORS Middleware Whitelist
+
+# A list of origin hostnames that are authorized to make cross-site HTTP requests.
+# The value 'null' can also appear in this list, and will match the Origin: null header
+# that is used in “privacy-sensitive contexts”, such as when the client is running from
+# a file:// domain. Defaults to [].
+# Port 3000 is the default port for React apps.
+CORS_ORIGIN_WHITELIST = (
+    '127.0.0.1:3000/'
+)
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+SITE_ID = 1

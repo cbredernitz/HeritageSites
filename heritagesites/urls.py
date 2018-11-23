@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
@@ -14,5 +14,5 @@ urlpatterns = [
     path('sites/<int:pk>/delete/', views.SiteDeleteView.as_view(), name='site_delete'),
     path('sites/<int:pk>/update/', views.SiteUpdateView.as_view(), name='site_update'),
 
-    path('search/', views.SiteFilterView.as_view(), kwargs=None, name='search')
+    path('search/', views.SiteFilterView.as_view(), kwargs=None, name='search'),
 ]
